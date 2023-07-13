@@ -1,6 +1,6 @@
 <template lang="">
     <div class="bg-white shadow-[0px_4px_140px_0px_A6A6A6]">
-        <div class="w-[300px] flex flex-col h-screen justify-between">
+        <div class="w-[300px] flex flex-col h-screen justify-between fixed">
             <div class="h-[90vh] sidebar-profile-menu overflow-x-scroll">
                 <div class="mt-12 text-center text-2xl font-bold">
                     Booking Venue Dufan
@@ -15,8 +15,7 @@
                             href="/admin"
                             class="py-3 hover:bg-neutral-50 px-8"
                             :class="{
-                                active:
-                                    $page.component === 'Admin/Dashboard',
+                                active: $page.component === 'Admin/Dashboard',
                             }"
                         >
                             <div class="flex gap-3 items-center">
@@ -26,25 +25,29 @@
                         </Link>
                         <!-- Transaction -->
                         <Link
-                            href="/"
+                            href="/admin/transaction"
                             class="py-3 hover:bg-neutral-50 px-8"
                             :class="{
-                                active:
-                                    $page.component === 'admin/transaction',
+                                active: $page.url.startsWith(
+                                    '/admin/transaction'
+                                ),
                             }"
                         >
                             <div class="flex gap-3 items-center">
-                                <div><font-awesome-icon icon="dollar-sign" /></div>
+                                <div>
+                                    <font-awesome-icon icon="dollar-sign" />
+                                </div>
                                 <div class="text-neutral-500">Transaction</div>
                             </div>
                         </Link>
-                              <!-- Transaction -->
-                              <Link
-                            href="/"
+                        <!-- List Venue -->
+                        <Link
+                            href="/admin/venue"
                             class="py-3 hover:bg-neutral-50 px-8"
                             :class="{
-                                active:
-                                    $page.component === 'admin/transaction',
+                                active: $page.url.startsWith(
+                                    '/admin/venue'
+                                ),
                             }"
                         >
                             <div class="flex gap-3 items-center">
@@ -75,19 +78,24 @@
 <script setup>
 import { Link, router, usePage } from "@inertiajs/vue3";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faRightFromBracket, faHouse,faDollarSign,faList } from "@fortawesome/free-solid-svg-icons";
-library.add([faRightFromBracket, faHouse,faDollarSign,faList]);
+import {
+    faRightFromBracket,
+    faHouse,
+    faDollarSign,
+    faList,
+} from "@fortawesome/free-solid-svg-icons";
+library.add([faRightFromBracket, faHouse, faDollarSign, faList]);
 
 const page = usePage().props;
 
 function logout() {
-    router.post("/logout");
+    router.post("/admin/logout");
 }
 </script>
 
 <style>
 .active {
     background: #f5f5f5;
-    border-left: 3px solid #52e6c9;
+    border-left: 3px solid #3b82f6;
 }
 </style>
